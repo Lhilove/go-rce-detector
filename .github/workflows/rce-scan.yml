@@ -24,7 +24,7 @@ jobs:
 
 
       - name: Debug workspace
-         run: |
+        run: |
           pwd
           ls -la
           find . -name "*.go"
