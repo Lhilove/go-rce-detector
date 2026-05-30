@@ -22,10 +22,20 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
+
+      - name: Debug workspace
+         run: |
+          pwd
+          ls -la
+          find . -name "*.go"
+
+
       - name: Build scanner
-        run: go build -o go-rce-detector .
+        run: |
+          go build -o go-rce-detector main.go
+          ls -la
 
       - name: Run RCE scan
         run: |
-          echo "Running RCE detection scan..."
+          chmod +x ./go-rce-detector
           ./go-rce-detector ./testdata
