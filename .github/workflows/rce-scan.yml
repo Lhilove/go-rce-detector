@@ -23,7 +23,7 @@ jobs:
         run: go mod tidy
 
       - name: Build scanner
-        run: go build -o gosentinel .
+        run: go build -o go-rce-detector .
 
       - name: Run RCE scan
         run: |
