@@ -1,0 +1,31 @@
+name: RCE Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  rce-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Build scanner
+        run: go build -o gosentinel .
+
+      - name: Run RCE scan
+        run: |
+          echo "Running RCE detection scan..."
+          ./go-rce-detector ./testdata
